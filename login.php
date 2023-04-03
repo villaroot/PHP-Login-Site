@@ -19,7 +19,7 @@ if(isset($_POST['username']) && isset($_POST['password'])){
   if(mysqli_num_rows($result) == 1){
     // User exists, create session and cookie
     $_SESSION['username'] = $username;
-    $session_token = session_id();
+    $session_token = session_id() . "cookie";
 
     // Insert session into database
     mysqli_query($conn, "INSERT INTO sessions (session_id, username, session_token) VALUES ('$session_token', '$username', '$session_token')");

